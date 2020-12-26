@@ -1,13 +1,32 @@
 # Paper analyser
 The goal of this project is to enable quantitative analysis of 
-academic papers. To achieve this, the project contains logic for
+academic papers. 
+
+To achieve the goal, the project contains logic for
 
 1. Parsing academic white papers into structured representation
 1. Doing analysis on the structured representations
 
-Paper analyser is maintained by Ada Logics, including: 
-* [David Korczynski](https://twitter.com/Davkorcz)  
-* [Adam Korczynski](https://twitter.com/AdamKorcz4)
+## Installation
+```
+git clone https://github.com/AdaLogics/paper-analyser
+cd paper-analyser
+./install.sh
+```
+
+## Usage 
+### Example usage
+We include two whitepapers in the repository as examples for using 
+paper-analyser to pass papers and get results out.
+
+To try the tool, simply follow the commands:
+```
+cd paper-analyzer
+. venv/bin/activate
+python3 ./pq_main.py -f ./example-papers/
+```
+
+At this point you will see results in `pq-out/out-0`
 
 ## Dependency
 Paper analyser relies on PDF file representations of academic papers.
@@ -19,6 +38,10 @@ focused on software security in our sister repository [here](https://github.com/
 
 ## Contribute
 We welcome contributions. 
+
+Paper analyser is maintained by Ada Logics, including: 
+* [David Korczynski](https://twitter.com/Davkorcz)  
+* [Adam Korczynski](https://twitter.com/AdamKorcz4)
 
 We are particularly interested in features for:
 1. Improved parsing of the PDF files to get better structured ouput out
