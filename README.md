@@ -7,22 +7,22 @@ To achieve the goal, the project contains logic for
 1. Parsing academic white papers into structured representation
 1. Doing analysis on the structured representations
 
+
+#### Paper dependency graph
 The project as it currently stands focuses on the task of taking 
 a list of arbitrary papers in the form of PDFs, and then creating
 a dependency graph of citations amongst these papers. This graph
-then shows how each of the PDFs reference each other.
+then shows how each of the PDFs reference each other. Paper analyser
+achieves this by going through the steps:
 
-To achieve the above task, various tasks are are needed, e.g. :
-
-1. parsing the papers to extract relevant data,
+1. Parse the papers to extract relevant data
    1. Read the PDF files to a format usable in Python
-   1. Extract (1) title and (2) citations of a given paper
-   1. Identify the raw data of the "References" section
-
-1. parse the raw "References" section into individual refereces:
-   1. Extract the (1) title and (2) authors of the citation
-   1. Normalise data of the extracted citations.
-1. Do some dependency analysis based on the above citation extractions
+   1. Extract title of a given paper
+   1. Extract the raw data of the "References" section
+1. Parse the raw "References" section into individual refereces:
+   1. Extract the title and authors of the citation
+   1. Normalise the data of the extracted citations
+1. Do dependency analysis based on the above citation extractions
 
 ## Installation
 ```
@@ -57,4 +57,4 @@ We are particularly interested in features for:
 If you would like to contribute but dont have a feature in mind, please see the list below for suggestions:
 
 * Extraction of authors from papers
-* Extractino of the actual text from the papers. This could be used for a lot of cool data analysis
+* Extraction of the actual text from the papers. This could be used for a lot of cool data analysis
