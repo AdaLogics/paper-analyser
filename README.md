@@ -28,12 +28,33 @@ python3 ./pq_main.py -f ./example-papers/
 
 At this point you will see results in `pq-out/out-0`
 
-## Dependency
+Specifically, you will see:
+```
+$ ls pq-out/out-0/
+data_out  img  json_data  normalised_dependency_graph.json  parsed_paper_data.json
+```
+
+* `data_out` contains one `.txt` and one `.xml` file for each PDF. These `.txt` and `.xml` are simply data representations of the content of the given PDF file.
+* `json_data` contains JSON data representations for each paper
+* `img` contains a `.png` image of a citation-dependency graph of the PDF files in the folder 
+* `parsed_paper_data.json` is a single json file containing data about the papers analysed, such as the title of each paper as well as the papers cited by each paper. 
+
+### Getting larger paper lists
 Paper analyser relies on PDF file representations of academic papers.
 As such, it is up to you to find these papers. 
 
 For convenience we maintain a list of links to software analysis papers
 focused on software security in our sister repository [here](https://github.com/AdaLogics/software-security-paper-list)
+
+As an example of doing analysis on several Fuzzing papers, you can use the following commands:
+
+```
+cd paper-analyzer
+mkdir tmp && cd tmp
+git clone https://github.com/AdaLogics/software-security-paper-list
+cd software-security-paper-list
+python auto_download.py Fuzzing
+```
 
 
 ## Contribute
