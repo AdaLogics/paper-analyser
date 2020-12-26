@@ -6,7 +6,7 @@ academic papers. To achieve this, the project contains logic for
 1. Doing analysis on the structured representations
 
 Paper analyser is maintained by Ada Logics, including: 
-* [David Korczynski](https://twitter.com/Davkorcz])  
+* [David Korczynski](https://twitter.com/Davkorcz)  
 * [Adam Korczynski](https://twitter.com/AdamKorcz4)
 
 ## Dependency
