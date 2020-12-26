@@ -7,7 +7,6 @@ To achieve the goal, the project contains logic for
 1. Parsing academic white papers into structured representation
 1. Doing analysis on the structured representations
 
-
 #### Paper dependency graph
 The project as it currently stands focuses on the task of taking 
 a list of arbitrary papers in the form of PDFs, and then creating
@@ -24,12 +23,6 @@ achieves this by going through the steps:
    1. Normalise the data of the extracted citations
 1. Do dependency analysis based on the above citation extractions
 
-## Installation
-```
-git clone https://github.com/AdaLogics/paper-analyser
-cd paper-analyser
-./install.sh
-```
 
 ## Usage 
 To see example usage of a simple exmplae look at the [simple_example.md](/docs/simple_example.md)
@@ -40,6 +33,23 @@ focused on software security in our sister repository [software-security-paper-l
 
 To see an example of doing analysis on many papers look at the explanation here [large_example.md](/docs/larger_example.md)
 
+## Example visualisation
+
+We have also created visualisations for the output of the paper 
+analyser, which makes it very nice to rapidly understand the 
+relationship between the academic papers in the data set. 
+
+See a link here for an example of the visualisations
+[https://adalogics.com/software-security-research-citations-visualiser](https://adalogics.com/software-security-research-citations-visualiser)
+
+These visualistions will be open sourced in the near future.
+
+## Installation
+```
+git clone https://github.com/AdaLogics/paper-analyser
+cd paper-analyser
+./install.sh
+```
 
 ## Contribute
 We welcome contributions. 
