@@ -21,7 +21,7 @@ To achieve the above task, various tasks are are needed, e.g. :
 
 1. parse the raw "References" section into individual refereces:
    1. Extract the (1) title and (2) authors of the citation
-1. Normalise data of the extracted citations.
+   1. Normalise data of the extracted citations.
 1. Do some dependency analysis based on the above citation extractions
 
 ## Installation
@@ -56,6 +56,8 @@ data_out  img  json_data  normalised_dependency_graph.json  parsed_paper_data.js
 * `img` contains a `.png` image of a citation-dependency graph of the PDF files in the folder 
 * `parsed_paper_data.json` is a single json file containing data about the papers analysed, such as the title of each paper as well as the papers cited by each paper. 
 
+For a complete view on the output report, look at the [simple_example.md](/docs/simple_example.md)
+
 ### Getting larger paper lists
 Paper analyser relies on PDF file representations of academic papers.
 As such, it is up to you to find these papers. 
@@ -63,7 +65,7 @@ As such, it is up to you to find these papers.
 For convenience we maintain a list of links to software analysis papers
 focused on software security in our sister repository [here](https://github.com/AdaLogics/software-security-paper-list)
 
-As an example of doing analysis on several Fuzzing papers, you can use the following commands:
+As an example of doing analysis on many papers, look at the eplanation here [large_example.md](/docs/larger_example.md)
 
 ```
 cd paper-analyzer
