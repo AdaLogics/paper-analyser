@@ -54,6 +54,8 @@ def read_parsed_json_data(workdir, target_dir):
     # various forms of data.
     parsed_papers = pq_format_reader.parse_first_stage(workdir, target_dir)
 
+    pq_format_reader.display_summary(workdir, parsed_papers)
+
     # Now extract the group dependencies
     pq_format_reader.identify_group_dependencies(workdir, parsed_papers)
 

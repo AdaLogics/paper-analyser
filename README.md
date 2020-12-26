@@ -56,6 +56,15 @@ cd software-security-paper-list
 python auto_download.py Fuzzing
 ```
 
+At this point you will see more than 80 papers in the directory `out/Fuzzing/`
+
+We continue to do analysis on these papers:
+```
+cd ../..
+python3 pq_main.py -f ./tmp/software-security-paper-list/out/Fuzzing
+```
+
+
 
 ## Contribute
 We welcome contributions. 

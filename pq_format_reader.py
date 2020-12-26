@@ -8,6 +8,21 @@ import pylab
 import random
 
 
+def append_to_report(workdir, str_to_write, to_print=True):
+    work_report = os.path.join(workdir, "report.txt")
+    if not os.path.isfile(work_report):
+        with open(work_report, "w+") as wr:
+            wr.write(str_to_write)
+            wr.write("\n")
+    else:
+        with open(work_report, "ab") as wr:
+            wr.write(str_to_write.encode("utf-8"))
+            wr.write("\n".encode("utf-8"))
+
+    if to_print:
+        print(str_to_write)
+
+
 def split_reference_section_into_references(all_content, to_print=True):
     '''
     Takes a raw string that resembles references and returns a python
@@ -439,7 +454,7 @@ def read_json_file(filename):
 
 def identify_group_dependencies(workdir, parsed_papers):
     """ identifies who cites who in a group of papers """
-    print("Identifying references within the group")
+    append_to_report(workdir, "Identifying references within the group")
     g1 = gv.Digraph(format='png')
 
     MAX_STR_SIZE = 15
@@ -507,15 +522,15 @@ def identify_group_dependencies(workdir, parsed_papers):
             if cites == True:
                 cited_by.append(tmp_paper)
         src_paper['cited_by'] = cited_by
-        print("Paper:")
-        print("\t%s" % (src_paper['filename']))
-        print("\t%s" % (src_paper['result']['paper-title']))
-        print("\tNormalised title: %s" %
+        append_to_report(workdir, "Paper:")
+        append_to_report(workdir, "\t%s" % (src_paper['filename']))
+        append_to_report(workdir, "\t%s" % (src_paper['result']['paper-title']))
+        append_to_report(workdir, "\tNormalised title: %s" %
               (src_paper['result']['paper-title-normalised']))
-        print("\tCited by: ")
+        append_to_report(workdir, "\tCited by: ")
         for cited_by_paper in cited_by:
-            print("\t\t%s" % (cited_by_paper['result']['paper-title']))
-        print("---------------------------------")
+            append_to_report(workdir, "\t\t%s" % (cited_by_paper['result']['paper-title']))
+        append_to_report(workdir, "---------------------------------")
 
         paper_info = {}
         paper_info['name'] = src_paper['result']['paper-title'].decode("utf-8")
@@ -531,13 +546,13 @@ def identify_group_dependencies(workdir, parsed_papers):
             })
         dependency_graph.append(paper_info)
 
-    print("Done identifying references within the group")
+    append_to_report(workdir, "Done identifying references within the group")
     #g1.view()
 
     filename = g1.render(
         filename=os.path.join(workdir, "img", "citation_graph"))
     print("idx: %d" % (idx))
-    print(parsed_papers)
+    #print(parsed_papers)
 
     dependency_graph_path = os.path.join(workdir,
                                          "normalised_dependency_graph.json")
@@ -545,30 +560,32 @@ def identify_group_dependencies(workdir, parsed_papers):
         json.dump(dependency_graph, dependency_graph_json)
 
 
-def display_summary(parsed_papers_raw):
+def display_summary(workdir, parsed_papers_raw):
     succ = []
     fail = []
     succ_sigs = []
     miss_sigs = []
     all_titles = []
-    print("Going through the parsed papers")
+    append_to_report(workdir, "######################################")
+    append_to_report(workdir, " Parsed papers summary        ")
+    append_to_report(workdir, "######################################")
     all_normalised_citations = set()
     for paper in parsed_papers_raw:
-        print("paper:")
-        print("\t%s" % (paper['filename']))
-        print("\t%s" % (paper['result']['paper-title']))
-        print("\tNormalised title: %s" %
+        append_to_report(workdir, "paper:")
+        append_to_report(workdir, "\t%s" % (paper['filename']))
+        append_to_report(workdir, "\t%s" % (paper['result']['paper-title']))
+        append_to_report(workdir, "\tNormalised title: %s" %
               (paper['result']['paper-title-normalised']))
-        print("\tReferences:")
+        append_to_report(workdir, "\tReferences:")
         for ref in paper['result']['references']:
             if ref['parsed'] != None:
-                print("\t\tAuthors: %s" % (ref['parsed']['Authors']))
-                print("\t\tTitle: %s" % (ref['parsed']['Title']))
-                print("\t\tNormalised: %s" % (ref['normalised-title']))
+                append_to_report(workdir, "\t\tAuthors: %s" % (ref['parsed']['Authors']))
+                append_to_report(workdir, "\t\tTitle: %s" % (ref['parsed']['Title']))
+                append_to_report(workdir, "\t\tNormalised: %s" % (ref['normalised-title']))
                 all_normalised_citations.add(ref['normalised-title'])
             else:
-                print("\t\tCould not parse")
-            print("\t\t-------------------")
+                append_to_report(workdir, "\t\tCould not parse")
+            append_to_report(workdir, "\t\t-------------------")
             #print("\t\t%s"%(str(ref['parsed'])))
 
         #print("[+] %s"%(paper['title']))
@@ -588,7 +605,7 @@ def display_summary(parsed_papers_raw):
             all_titles.append(paper['result']['paper-title'])
 
     # Check which papers are in our set:
-    print("All of our papers:")
+    append_to_report(workdir, "All of our papers:")
     cited_papers = list()
     noncited_papers = list()
     for paper in parsed_papers_raw:
@@ -601,32 +618,32 @@ def display_summary(parsed_papers_raw):
             cited_papers.append(paper)
         else:
             noncited_papers.append(paper)
-    print("Cited papers:")
+    append_to_report(workdir, "Cited papers:")
     for p in cited_papers:
-        print("\t%s" % (p['result']['paper-title']))
-    print("Noncited papers:")
+        append_to_report(workdir, "\t%s" % (p['result']['paper-title']))
+    append_to_report(workdir, "Noncited papers:")
     for p in noncited_papers:
-        print("\t%s" % (p['result']['paper-title']))
+        append_to_report(workdir, "\t%s" % (p['result']['paper-title']))
 
     #exit(0)
 
     # Now display the content.
-    print("Succ: %d" % (len(succ)))
-    print("Fail: %d" % (len(fail)))
-    print("Succ sigs: %d" % (len(succ_sigs)))
-    print("Failed sigs: %d" % (len(miss_sigs)))
+    append_to_report(workdir, "Succ: %d" % (len(succ)))
+    append_to_report(workdir, "Fail: %d" % (len(fail)))
+    append_to_report(workdir, "Succ sigs: %d" % (len(succ_sigs)))
+    append_to_report(workdir, "Failed sigs: %d" % (len(miss_sigs)))
 
-    print("Summary of references:")
+    append_to_report(workdir, "Summary of references:")
     # Now do some status on how many references we have in total
     all_refs = dict()
     #for siglist in succ_sigs:
     for sig in succ_sigs:
         # Normalise
-        print("Normalising: %s" % (sig['Title']))
+        append_to_report(workdir, "Normalising: %s" % (sig['Title']))
         tmp_sig = sig['Title'].lower().replace(",", "").replace(" ",
                                                                 "").replace(
                                                                     "-", "")
-        print("\tNormalised: %s" % (tmp_sig))
+        append_to_report(workdir, "\tNormalised: %s" % (tmp_sig))
 
         #if "\xe2\x80\x9c" in tmp_sig:
         #    s1_split = tmp_sig.split("\xe2\x80\x9c")
@@ -643,40 +660,44 @@ def display_summary(parsed_papers_raw):
         #    all_refs[sig['Title'].lower().strip()] = 0
         #all_refs[sig['Title'].lower().strip()] += 1
 
-    print("All Titles of the papers in the data set:")
+    append_to_report(workdir, "######################################")
+    append_to_report(workdir, "All Titles (normalised) of the papers in the data set:")
     for t in all_titles:
-        print("\t%s" % (t))
+        append_to_report(workdir, "\t%s" % (t))
+    append_to_report(workdir, "######################################")        
 
-    print("All references/citatiosn issued by these papers")
-    print("\tName : Count")
+    append_to_report(workdir, "######################################")
+    append_to_report(workdir, "All references/citations (normalised) issued by these papers")
+    append_to_report(workdir, "######################################")
+    append_to_report(workdir, "\tName : Count")
     sorted_list = list()
     for title in all_refs:
         sorted_list.append((title, all_refs[title]))
     sorted_list = sorted(sorted_list, key=lambda x: x[1])
     for title, counts in sorted_list:
-        print("\t%s :  %d" % (title, counts))
+        append_to_report(workdir, "\t%s :  %d" % (title, counts))
 
-    print("The total number of unique citations: %d" % (len(sorted_list)))
+    append_to_report(workdir, "The total number of unique citations: %d" % (len(sorted_list)))
 
     return
     #exit(0)
 
-    all_missing_sigs = []
-    for missig in miss_sigs:
-        all_missing_sigs += missig
+    #all_missing_sigs = []
+    #for missig in miss_sigs:
+    #    all_missing_sigs += missig
 
         #for miss in missig:
         #    print("###\t%s"%(str(miss)))
 
-    print(
-        "[+] The references that we were unable to fully parse, but yet are cited by the papers:"
-    )
-    print(
-        "Total amount of references not parsed and thus not included in analysis: %d"
-        % (len(all_missing_sigs)))
-    print("All of these references:")
-    for missig in all_missing_sigs:
-        print("###\t%s" % (str(missig)))
+    #print(
+    #    "[+] The references that we were unable to fully parse, but yet are cited by the papers:"
+    #)
+    #print(
+    #    "Total amount of references not parsed and thus not included in analysis: %d"
+    #    % (len(all_missing_sigs)))
+    #print("All of these references:")
+    #for missig in all_missing_sigs:
+    #    print("###\t%s" % (str(missig)))
 
 
 def parse_first_stage(workdir, target_dir):
@@ -690,7 +711,7 @@ def parse_first_stage(workdir, target_dir):
                 "filename": complete_filename,
                 "result": res
             })
-    display_summary(parsed_papers)
+    #display_summary(parsed_papers)
 
     parsed_papers_json = os.path.join(workdir, "parsed_paper_data.json")
     with open(parsed_papers_json, "w+", encoding='utf-8') as ppj:
