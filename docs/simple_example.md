@@ -29,7 +29,7 @@ $ cat pq-out/out-0/report.txt
 ######################################
  Parsed papers summary        
 paper:
-    pq-out/out-7/json_data/json_dump_0.json
+    pq-out/out-0/json_data/json_dump_0.json
     b'A characterisation of system-wide propagation in the malware landscape '
     Normalised title: acharacterisationofsystemwidepropagationinthemalwarelandscape
     References:
@@ -118,7 +118,7 @@ paper:
         Normalised: dissectingandroidmalware:characterizationandevolution
         -------------------
 paper:
-    pq-out/out-7/json_data/json_dump_1.json
+    pq-out/out-0/json_data/json_dump_1.json
     b'Precise system-wide concatic malware unpacking '
     Normalised title: precisesystemwideconcaticmalwareunpacking
     References:
@@ -359,13 +359,13 @@ The total number of unique citations: 50
 ######################################
 Dependency graph based on citations
 Paper:
-    pq-out/out-7/json_data/json_dump_0.json
+    pq-out/out-0/json_data/json_dump_0.json
     b'A characterisation of system-wide propagation in the malware landscape '
     Normalised title: acharacterisationofsystemwidepropagationinthemalwarelandscape
     Cited by: 
 ---------------------------------
 Paper:
-    pq-out/out-7/json_data/json_dump_1.json
+    pq-out/out-0/json_data/json_dump_1.json
     b'Precise system-wide concatic malware unpacking '
     Normalised title: precisesystemwideconcaticmalwareunpacking
     Cited by: 
