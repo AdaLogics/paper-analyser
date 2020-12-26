@@ -15,10 +15,10 @@ then shows how each of the PDFs reference each other.
 To achieve the above task, various tasks are are needed, e.g. :
 
 1. parsing the papers to extract citations,
- 1. Read the PDF files to a format usable in Python
- 1. Extract (1) title and (2) citations of a given paper
- 1. For each citation in the paper:
-   1. Extract the (1) title and (2) authors of the citation
+   1. Read the PDF files to a format usable in Python
+   1. Extract (1) title and (2) citations of a given paper
+   1. For each citation in the paper:
+      1. Extract the (1) title and (2) authors of the citation
 1. Normalise the extracted citations
 1. Do some dependency analysis based on the above citation extractions
 
