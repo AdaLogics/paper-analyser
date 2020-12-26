@@ -7,6 +7,21 @@ To achieve the goal, the project contains logic for
 1. Parsing academic white papers into structured representation
 1. Doing analysis on the structured representations
 
+The project as it currently stands focuses on the task of taking 
+a list of arbitrary papers in the form of PDFs, and then creating
+a dependency graph of citations amongst these papers. This graph
+then shows how each of the PDFs reference each other.
+
+To achieve the above task, various tasks are are needed, e.g. :
+
+1. parsing the papers to extract citations,
+ 1. Read the PDF files to a format usable in Python
+ 1. Extract (1) title and (2) citations of a given paper
+ 1. For each citation in the paper:
+   1. Extract the (1) title and (2) authors of the citation
+1. Normalise the extracted citations
+1. Do some dependency analysis based on the above citation extractions
+
 ## Installation
 ```
 git clone https://github.com/AdaLogics/paper-analyser
