@@ -85,9 +85,7 @@ if __name__ == "__main__":
     elif args.task == "dependency-graph":
         workdir = create_workdir()
         json_data_dir = os.path.join(workdir, "json_data")
-        #target_dir = "json_data"
-        #if len(sys.argv) == 2:
-        #    read_parsed_json_data(target_dir)
+
         convert_pdfs_to_data(args.folder, workdir, json_data_dir)
         read_parsed_json_data(workdir, json_data_dir)
     else:

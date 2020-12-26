@@ -454,7 +454,9 @@ def read_json_file(filename):
 
 def identify_group_dependencies(workdir, parsed_papers):
     """ identifies who cites who in a group of papers """
-    append_to_report(workdir, "Identifying references within the group")
+    append_to_report(workdir, "######################################")
+    append_to_report(workdir, "Dependency graph based on citations")
+    #append_to_report(workdir, "######################################")
     g1 = gv.Digraph(format='png')
 
     MAX_STR_SIZE = 15
@@ -546,7 +548,7 @@ def identify_group_dependencies(workdir, parsed_papers):
             })
         dependency_graph.append(paper_info)
 
-    append_to_report(workdir, "Done identifying references within the group")
+    #append_to_report(workdir, "Done identifying references within the group")
     #g1.view()
 
     filename = g1.render(
@@ -568,7 +570,7 @@ def display_summary(workdir, parsed_papers_raw):
     all_titles = []
     append_to_report(workdir, "######################################")
     append_to_report(workdir, " Parsed papers summary        ")
-    append_to_report(workdir, "######################################")
+    #append_to_report(workdir, "######################################")
     all_normalised_citations = set()
     for paper in parsed_papers_raw:
         append_to_report(workdir, "paper:")
@@ -605,7 +607,9 @@ def display_summary(workdir, parsed_papers_raw):
             all_titles.append(paper['result']['paper-title'])
 
     # Check which papers are in our set:
-    append_to_report(workdir, "All of our papers:")
+    append_to_report(workdir, "######################################")
+    append_to_report(workdir, "Papers in the data set :")
+    #append_to_report(workdir, "######################################")
     cited_papers = list()
     noncited_papers = list()
     for paper in parsed_papers_raw:
@@ -618,10 +622,16 @@ def display_summary(workdir, parsed_papers_raw):
             cited_papers.append(paper)
         else:
             noncited_papers.append(paper)
+    #append_to_report(workdir, "######################################")
     append_to_report(workdir, "Cited papers:")
+    #append_to_report(workdir, "######################################")
     for p in cited_papers:
         append_to_report(workdir, "\t%s" % (p['result']['paper-title']))
+
+
+    #append_to_report(workdir, "######################################")    
     append_to_report(workdir, "Noncited papers:")
+    #append_to_report(workdir, "######################################")
     for p in noncited_papers:
         append_to_report(workdir, "\t%s" % (p['result']['paper-title']))
 
@@ -633,17 +643,17 @@ def display_summary(workdir, parsed_papers_raw):
     append_to_report(workdir, "Succ sigs: %d" % (len(succ_sigs)))
     append_to_report(workdir, "Failed sigs: %d" % (len(miss_sigs)))
 
-    append_to_report(workdir, "Summary of references:")
+    #append_to_report(workdir, "Summary of references:")
     # Now do some status on how many references we have in total
     all_refs = dict()
     #for siglist in succ_sigs:
     for sig in succ_sigs:
         # Normalise
-        append_to_report(workdir, "Normalising: %s" % (sig['Title']))
+        #append_to_report(workdir, "Normalising: %s" % (sig['Title']))
         tmp_sig = sig['Title'].lower().replace(",", "").replace(" ",
                                                                 "").replace(
                                                                     "-", "")
-        append_to_report(workdir, "\tNormalised: %s" % (tmp_sig))
+        #append_to_report(workdir, "\tNormalised: %s" % (tmp_sig))
 
         #if "\xe2\x80\x9c" in tmp_sig:
         #    s1_split = tmp_sig.split("\xe2\x80\x9c")
@@ -662,13 +672,14 @@ def display_summary(workdir, parsed_papers_raw):
 
     append_to_report(workdir, "######################################")
     append_to_report(workdir, "All Titles (normalised) of the papers in the data set:")
+    #append_to_report(workdir, "######################################")
     for t in all_titles:
         append_to_report(workdir, "\t%s" % (t))
     append_to_report(workdir, "######################################")        
 
     append_to_report(workdir, "######################################")
     append_to_report(workdir, "All references/citations (normalised) issued by these papers")
-    append_to_report(workdir, "######################################")
+    #append_to_report(workdir, "######################################")
     append_to_report(workdir, "\tName : Count")
     sorted_list = list()
     for title in all_refs:
@@ -677,8 +688,9 @@ def display_summary(workdir, parsed_papers_raw):
     for title, counts in sorted_list:
         append_to_report(workdir, "\t%s :  %d" % (title, counts))
 
+    append_to_report(workdir, "######################################")
     append_to_report(workdir, "The total number of unique citations: %d" % (len(sorted_list)))
-
+    #append_to_report(workdir, "######################################")
     return
     #exit(0)
 
