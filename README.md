@@ -45,9 +45,16 @@ See a link here for an example of the visualisations
 These visualistions will be open sourced in the near future.
 
 
-Citation graph example:
+### Citation graph example:
 
 ![Alt txt](/example-images/paper-citation-graph.png)
+
+
+### Wordcloud of 85 fuzzing papers
+![Alt txt](/example-images/fuzz-wordcloud.png)
+
+### Wordcount of 85 fuzzing papers
+![Alt txt](/example-images/fuzz-barplot.png)
 
 ## Installation
 ```
