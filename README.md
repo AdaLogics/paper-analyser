@@ -44,6 +44,11 @@ See a link here for an example of the visualisations
 
 These visualistions will be open sourced in the near future.
 
+
+Citation graph example:
+
+![Alt txt](/example-images/paper-citation-graph.png)
+
 ## Installation
 ```
 git clone https://github.com/AdaLogics/paper-analyser
