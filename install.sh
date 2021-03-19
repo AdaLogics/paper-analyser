@@ -1,6 +1,7 @@
 # Install some needed packages
 sudo apt-get install python3
 sudo apt-get install python3-pip
+sudo apt install graphviz
 
 # Create a virtual environment
 virtualenv venv
@@ -9,8 +10,4 @@ virtualenv venv
 . venv/bin/activate
 
 # Install various packages
-pip3 install graphviz
-pip3 install matplotlib
-pip3 install pdf2txt
-pip3 install requests
-pip3 install simplejson
+pip install -r requirements.txt
