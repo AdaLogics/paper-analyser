@@ -3,15 +3,20 @@ and store data contained in an academic article.
 """
 import re
 from bs4 import BeautifulSoup
+from serde import Model, fields
 
 
 def text(field):
     return field.text.strip() if field else ""
     
 
-class Author:
+class Author(Model):
     """Contains information about an author.
     """
+    name: fields.Str()
+    surname: fields.Str()
+    affiliation: fields.Optional(fields.List(fields.Str()))
+
     def __init__(self, soup):
         """Creates an `Author` by parsing a `soup` of type
         `BeautifulSoup`.
@@ -30,13 +35,27 @@ class Author:
 
         return s.strip()
 
-class Article:
+
+class _Article(Model):
+    """This is required by serde for serialization, which
+    is unable to take references to self as a field.
+    For all purposes, refer to `Article`.
+    """
+    pass
+
+
+class Article(_Article):
     """Represents an academic article or a reference contained in
     an article.
 
     The data is parsed from a TEI XML file (`from_file()`) or
     directly from a `BeautifulSoup` object.
     """
+    title: fields.Str()
+    authors: fields.List(Author)
+    year: fields.Optional(fields.Date())
+    references: fields.Optional(fields.List(_Article))
+
     def __init__(self, soup, is_reference=False):
         """Create a new `Article` by parsing a `soup: BeautifulSoup`
         instance.
@@ -51,19 +70,17 @@ class Article:
 
         if is_reference:
             self.authors = list(map(Author, soup.find_all("author")))
+            self.references = []
         else:
             self.authors = list(map(Author, soup.analytic.find_all("author")))
             self.references = self._parse_biblio(soup)
 
     @staticmethod
-    def from_file(self, tei_file):
+    def from_file(tei_file):
         """Creates an `Article` by parsing a TEI XML file.
         """
-        if soup is None:
-            if tei_file is None:
-                raise Exception("Please provide either `tei_file` or `soup`)")
-            with open(tei_file) as f:
-                soup = BeautifulSoup(f, "lxml")
+        with open(tei_file) as f:
+            soup = BeautifulSoup(f, "lxml")
 
         return Article(soup)
 
