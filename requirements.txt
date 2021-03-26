@@ -1,0 +1,5 @@
+graphviz
+matplotlib
+pdf2txt
+requests
+simplejson
