@@ -6,7 +6,7 @@ import os
 from docopt import docopt
 from bs4 import BeautifulSoup
 from grobid_client.grobid_client import GrobidClient
-from pqlib import Article
+from base import Article
 
 # Valid grobid services
 FULL = "processFulltextDocument"
@@ -31,11 +31,13 @@ def parse_pdf(client, pdf_file):
 if __name__ == "__main__":
     args = docopt(__doc__)
 
-    grobid = GrobidClient("./grobid_config.json")
+    grobid = GrobidClient("./grobid.json")
 
     for pdf_file in os.listdir(args["<folder>"]):
         if not pdf_file.endswith(".pdf"):
             continue
         print(pdf_file)
         a = parse_pdf(grobid, os.path.join(args["<folder>"], pdf_file))
-        print(a.to_json())
+        # Can also do print(a.to_json())
+        a.summary()
+        print()

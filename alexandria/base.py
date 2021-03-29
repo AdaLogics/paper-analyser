@@ -106,3 +106,14 @@ class Article(_Article):
 
     def __str__(self):
         return f"'{self.title}' - {' '.join(map(str, self.authors))}"
+
+    def summary(self):
+        """Prints a human-readable summary.
+        """
+        print(f"Title: {self.title}")
+        print("Authors: " + ", ".join(map(str, self.authors)))
+        if self.references:
+            print("References:")
+            for r in self.references:
+                r.summary()
+                print("-------------------")
