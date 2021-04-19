@@ -22,8 +22,8 @@ class Author(Model):
         `BeautifulSoup`.
         """
         if not soup.persname:
-            self.name = None
-            self.surname = None
+            self.name = ""
+            self.surname = ""
         else:
             self.name = text(soup.persname.forename)
             self.surname = text(soup.persname.surname)
