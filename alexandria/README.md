@@ -5,7 +5,13 @@ Code refactoring using `grobid.
 Launch an instance of `grobid`. If it is not listening locally, configure
 `grobid.json` accordingly.
 
-Then to process the pdf files in `example-papers` launch:
+Launch a mongodb instance. For example, using Docker:
+
+```
+docker run -p 27017:27017 -d mongo
+```
+
+To process the pdf files in `example-papers` launch:
 
 ```
 python runner.py ../example-papers
@@ -14,8 +20,11 @@ python runner.py ../example-papers
 Output:
 
 ```
+Please check out the script for more info.
 GROBID server is up and running
-1908.09204.pdf
+Connecting to db.
+Processing files in ../example-papers/
+Parsing 1908.09204.pdf
 Title: RePEconstruct: reconstructing binaries with self-modifying code and import address table destruction
 Authors: David Korczynski
 References:
@@ -149,9 +158,9 @@ Title: Panorama: Capturing System-wide Information Flow for Malware Detection an
 Authors: Dawn Heng Yin, Manuel Song, Christopher Egele, Engin Kruegel, Kirda
 -------------------
 
-1908.10167.pdf
+Parsing 1908.10167.pdf
 Title: RePEconstruct: reconstructing binaries with self-modifying code and import address table destruction
-Authors: David Korczynski
+Authors: David Korczynski, Createprocessa, Createfilea, , 
 References:
 Title: System-Level Support for Intrusion Recovery
 Authors: Andrei Bacs, Remco Vermeulen, Asia Slowinska, Herbert Bos
@@ -255,4 +264,13 @@ Authors: Dawn Heng Yin, Manuel Song, Christopher Egele, Engin Kruegel, Kirda
 Title: Dissecting Android Malware: Characterization and Evolution
 Authors: Yajin Zhou, Xuxian Jiang
 -------------------
+```
+
+## Processing data
+
+A simple example of how to process the data:
+
+
+```
+python visualize.py
 ```
