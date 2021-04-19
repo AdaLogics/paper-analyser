@@ -21,8 +21,12 @@ class Author(Model):
         """Creates an `Author` by parsing a `soup` of type
         `BeautifulSoup`.
         """
-        self.name = text(soup.persname.forename)
-        self.surname = text(soup.persname.surname)
+        if not soup.persname:
+            self.name = None
+            self.surname = None
+        else:
+            self.name = text(soup.persname.forename)
+            self.surname = text(soup.persname.surname)
         # TODO: better affiliation parsing.
         self.affiliation = list(map(text, soup.find_all("affiliation")))
 
@@ -52,6 +56,7 @@ class Article(_Article):
     directly from a `BeautifulSoup` object.
     """
     title: fields.Str()
+    text: fields.Str()
     authors: fields.List(Author)
     year: fields.Optional(fields.Date())
     references: fields.Optional(fields.List(_Article))
@@ -65,6 +70,7 @@ class Article(_Article):
         self.title = text(soup.title)
         self.doi = text(soup.idno)
         self.abstract = text(soup.abstract)
+        self.text = soup.text.strip() if soup.text else ""
         # FIXME
         self.year = None
 
