@@ -1,3 +1,0 @@
-[submodule "grobid_client"]
-	path = grobid_client
-	url = https://github.com/gchers/grobid_client_python

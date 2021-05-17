@@ -3,3 +3,8 @@ matplotlib
 pdf2txt
 requests
 simplejson
+git+git://github.com/kermitt2/grobid_client_python@4bce8b574da363171079b97eb84fe5ecfce8cfdb#egg=grobid_client
+pymongo
+docopt
+bs4
+serde
