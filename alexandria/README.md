@@ -1,15 +1,52 @@
-Code refactoring using `grobid.
+# Installation
 
-## Usage
+Before using Alexandria, you need to have two services running:
+`grobid` (used for processing pdf files) and `mongodb`.
 
-Launch an instance of `grobid`. If it is not listening locally, configure
-`grobid.json` accordingly.
 
-Launch a mongodb instance. For example, using Docker:
+### Grobid
+
+You first need to have an instance of [`grobid`](https://grobid.readthedocs.io/en/latest/) running.
+
+Using Docker:
+```
+docker run -t --rm --init -p 8080:8070 -p 8081:8071 lfoppiano/grobid:0.6.2
+```
+The above command will download the image and run it.
+(Add `-d` to run in daemon mode.)
+
+Verify that `grobid` is running at http://localhost:8070.
+
+
+If you configure `grobid` to listen on a different host/port, please adapt
+the `grobid.json` configuration.
+
+### Mongodb
+
+Alexandria requires you to have a mongodb instance running
+locally at the standard port (`27017`).
+
+Using docker:
 
 ```
-docker run -p 27017:27017 -d mongo
+docker run -p 27017:27017 mongo
 ```
+(Add `-d` to run in daemon mode.)
+
+### Alexandria
+
+You're now ready to install Alexandria.
+
+```
+git clone https://github.com/AdaLogics/paper-analyser
+cd paper-analyser/alexandria
+python3 -m venv venv
+. venv/bin/activate
+pip install -r ../requirements.txt
+```
+
+
+# Usage
 
 To process the pdf files in `example-papers` launch:
 
@@ -17,7 +54,8 @@ To process the pdf files in `example-papers` launch:
 python runner.py ../example-papers
 ```
 
-Output:
+<details>
+  <summary>Click to see the output.</summary>
 
 ```
 Please check out the script for more info.
@@ -265,12 +303,8 @@ Title: Dissecting Android Malware: Characterization and Evolution
 Authors: Yajin Zhou, Xuxian Jiang
 -------------------
 ```
+</details>
 
-## Processing data
+# Processing data
 
-A simple example of how to process the data:
-
-
-```
-python visualize.py
-```
+A simple example of how to process the data: [visualization.py](visualization.py).
