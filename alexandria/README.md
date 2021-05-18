@@ -39,15 +39,10 @@ You're now ready to install Alexandria.
 
 ```
 git clone https://github.com/AdaLogics/paper-analyser
-git submodule init
-git submodule update
 cd paper-analyser/alexandria
 python3 -m venv venv
 . venv/bin/activate
 pip install -r ../requirements.txt
-cd grobid_client
-pip install .
-cd ..
 ```
 
 
