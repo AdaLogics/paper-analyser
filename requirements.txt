@@ -1,5 +1,11 @@
+wheel
 graphviz
 matplotlib
 pdf2txt
 requests
 simplejson
+lxml
+serde
+bs4
+docopt
+pymongo
