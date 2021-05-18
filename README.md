@@ -68,9 +68,10 @@ cd paper-analyser
 ## Contribute
 We welcome contributions. 
 
-Paper analyser is maintained by Ada Logics, including: 
+Paper analyser is maintained by: 
 * [David Korczynski](https://twitter.com/Davkorcz)  
 * [Adam Korczynski](https://twitter.com/AdamKorcz4)
+* [Giovanni Cherubin](https://twitter.com/gchers)
 
 We are particularly interested in features for:
 1. Improved parsing of the PDF files to get better structured ouput out

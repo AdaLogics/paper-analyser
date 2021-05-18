@@ -1,3 +1,4 @@
+wheel
 graphviz
 matplotlib
 pdf2txt
@@ -8,3 +9,4 @@ pymongo
 docopt
 bs4
 serde
+lxml
